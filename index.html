@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>XUEXI | 个人主页</title>
+  <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
+    body {
+      background: #0d1117;
+      color: #e6edf3;
+      padding: 40px 20px;
+      line-height: 1.7;
+      position: relative;
+      overflow-x: hidden;
+    }
+    /* 粒子背景容器 */
+    #particles-js {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+      position: relative;
+      z-index: 2;
+    }
+    .avatar {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid #388bfd;
+      margin-bottom: 20px;
+      transition: 0.3s ease;
+    }
+    .avatar:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #388bfd60;
+    }
+    h1 {
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+    .typing {
+      color: #8b949e;
+      font-size: 18px;
+      margin-bottom: 30px;
+      min-height: 26px;
+    }
+    .links {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .links a {
+      padding: 10px 18px;
+      background: #222731;
+      border-radius: 8px;
+      color: #e6edf3;
+      text-decoration: none;
+      transition: 0.2s;
+    }
+    .links a:hover {
+      background: #388bfd;
+      transform: translateY(-2px);
+    }
+    .section {
+      text-align: left;
+      background: #161b22cc;
+      backdrop-filter: blur(6px);
+      padding: 24px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      border: 1px solid #30363d;
+      transition: 0.2s;
+    }
+    .section:hover {
+      border-color: #58a6ff;
+    }
+    .section h2 {
+      margin-bottom: 16px;
+      color: #58a6ff;
+    }
+    .footer {
+      margin-top: 50px;
+      color: #6e7681;
+      font-size: 14px;
+    }
+    .visitor {
+      margin: 10px 0 30px;
+      color: #8b949e;
+    }
+  </style>
+</head>
+<body>
+  <!-- 粒子背景 -->
+  <div id="particles-js"></div>
+
+  <div class="container">
+    <img class="avatar" src="https://avatars.githubusercontent.com/u/174943446?v=4" alt="头像">
+
+    <h1>XUEXI</h1>
+    <!-- 打字机效果 -->
+    <div class="typing" id="typeText"></div>
+
+    <!-- 访客统计 -->
+    <div class="visitor">
+      👀 访问人数：<img src="https://visitor-badge.laobi.icu/badge?page_id=qwe3245546458-hue.github.io" alt="访客统计">
+    </div>
+
+    <div class="links">
+      <a href="https://github.com/qwe3245546458-hue">GitHub主页</a>
+      <a href="mailto:xxx@xxx.com">联系邮箱</a>
+    </div>
+
+    <div class="section">
+      <h2>👋 关于我</h2>
+      <p>热爱计算机与编程，专注学习C语言、Python、前端开发与网络安全相关知识，喜欢动手做项目，不断提升技术能力。</p>
+    </div>
+
+    <div class="section">
+      <h2>💻 技能栈</h2>
+      <p>C语言 · Python · HTML/CSS · Git · Linux · 计算机网络基础</p>
+    </div>
+
+    <div class="section">
+      <h2>📂 我的项目</h2>
+      <p>• 后续会更新个人项目，敬请期待</p>
+    </div>
+
+    <div class="footer">
+      © 2025 XUEXI · Powered by GitHub Pages
+    </div>
+  </div>
+
+  <script>
+    // 1. 粒子背景配置
+    particlesJS("particles-js", {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: "#58a6ff" },
+        shape: { type: "circle" },
+        opacity: { value: 0.5, random: true },
+        size: { value: 3, random: true },
+        line_linked: { enable: true, distance: 150, color: "#58a6ff", opacity: 0.2, width: 1 },
+        move: { enable: true, speed: 1, direction: "none", random: true, straight: false, out_mode: "out" }
+      },
+      interactivity: {
+        detect_on: "canvas",
+        events: { onhover: { enable: true, mode: "grab" }, onclick: { enable: true, mode: "push" } }
+      }
+    });
+
+    // 2. 打字机动画
+    const textArr = [
+      "编程爱好者｜计算机专业学生",
+      "专注 C语言 · Python · 网络安全",
+      "持续学习，持续进步✨"
+    ];
+    let textIndex = 0;
+    let charIndex = 0;
+    const el = document.getElementById("typeText");
+    function typeWrite() {
+      if (charIndex < textArr[textIndex].length) {
+        el.innerHTML = textArr[textIndex].substring(0, charIndex+1)+"<span>|</span>";
+        charIndex++;
+        setTimeout(typeWrite, 80);
+      } else {
+        setTimeout(()=>{
+          textIndex = (textIndex+1) % textArr.length;
+          charIndex = 0;
+          typeWrite();
+        }, 2000);
+      }
+    }
+    typeWrite();
+  </script>
+</body>
+</html>
